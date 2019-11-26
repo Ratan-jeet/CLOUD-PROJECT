@@ -1,0 +1,27 @@
+#!/bin/bash
+docker create -v /config --name container1 busybox
+docker create -v /config --name container2 busybox
+docker create -v /config --name container3 busybox
+
+cd /home/sushil/cloud
+for f in *.hot
+do 
+ 
+	docker cp "$f" container1:/config 
+	docker cp "$f" container2:/config
+	
+
+
+done
+echo " hot data replicated"
+sleep 1000
+for f in *.warm
+do
+  # cp -v "$f" /home/sushil/cloud/cloud1/"${f%.csv}"$(date +%m%d%y).csv
+
+  docker cp "$f" container3:/config
+  echo " warm data replicated "
+  
+done
+
+

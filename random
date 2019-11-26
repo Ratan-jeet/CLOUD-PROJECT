@@ -1,0 +1,8 @@
+#!/bin/bash
+
+for n in {1..100}; do
+    dd if=/dev/urandom of=file$( printf %03d "$n" ).hot bs=1 count=$(( RANDOM + 1024 ))
+	 dd if=/dev/urandom of=file$( printf %03d "$n" ).cold bs=1 count=$(( RANDOM + 1024 ))
+ dd if=/dev/urandom of=file$( printf %03d "$n" ).warm bs=1 count=$(( RANDOM + 1024 ))
+
+done
